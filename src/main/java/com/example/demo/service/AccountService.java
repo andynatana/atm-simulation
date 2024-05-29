@@ -8,6 +8,7 @@ import com.example.demo.mapper.AccountMapper;
 import com.example.demo.pojo.ws.response.AccountDTO;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.pojo.ws.params.AccountCreationParam;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,24 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException("The user does not have " + accountCategory.getName() + " account"));
     }
 
+    @Transactional
     public Account create(AccountCreationParam accountCreationParam) {
         Account account = createAccountInstanceFromParam(accountCreationParam);
         return accountRepository.save(account);
+    }
+
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    public Account findByAccountNumber(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber)
+                .orElseThrow(AccountNotFoundException::new);
+    }
+
+    @Transactional
+    public void save(Account account) {
+        accountRepository.save(account);
     }
 
     private Account createAccountInstanceFromParam(AccountCreationParam accountCreationParam) {
@@ -46,7 +62,4 @@ public class AccountService {
         return account;
     }
 
-    public List<Account> findAll() {
-        return accountRepository.findAll();
-    }
 }

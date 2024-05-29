@@ -40,4 +40,9 @@ public class User {
     @OneToMany(mappedBy = "owner")
     @JsonIgnore
     private List<Account> accountList;
+
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Transaction> transactionList;
 }

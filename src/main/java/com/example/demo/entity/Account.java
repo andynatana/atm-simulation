@@ -17,7 +17,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ACCOUNT_NUMBER", nullable = false)
+    @Column(name = "ACCOUNT_NUMBER", nullable = false, unique = true)
     private String accountNumber;
     private BigDecimal balance;
 
