@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Service
 @AllArgsConstructor
-public class TransactionService {
+public class WithdrawalService {
 
     private final AccountService accountService;
     private final TransactionBuilder transactionBuilder;

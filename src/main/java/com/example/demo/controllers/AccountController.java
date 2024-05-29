@@ -7,7 +7,7 @@ import com.example.demo.pojo.ws.params.WithdrawParam;
 import com.example.demo.pojo.ws.response.AccountDTO;
 import com.example.demo.service.AccountService;
 import com.example.demo.pojo.ws.params.AccountCreationParam;
-import com.example.demo.service.TransactionService;
+import com.example.demo.service.WithdrawalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.List;
 public class AccountController {
 
     private final AccountService accountService;
-    private final TransactionService transactionService;
+    private final WithdrawalService withdrawalService;
 
     @GetMapping("/check-balance")
     public ResponseEntity<AccountDTO> checkBalance(@RequestParam("userId") Long userId, @RequestParam("accountCategoryId") Long accountCategoryId) {
@@ -44,7 +44,7 @@ public class AccountController {
 
     @PostMapping
     public ResponseEntity<String> withdraw(@RequestBody WithdrawParam withdrawParam) throws BalanceInsufficientException {
-        String transactionId = transactionService.process(withdrawParam.amount(), withdrawParam.accountNumber());
+        String transactionId = withdrawalService.process(withdrawParam.amount(), withdrawParam.accountNumber());
         return ResponseEntity.ok(transactionId);
     }
 }

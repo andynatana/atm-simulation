@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Account;
 import com.example.demo.exception.BalanceInsufficientException;
 import com.example.demo.pojo.ws.response.AccountDTO;
 import jakarta.transaction.Transactional;
@@ -14,12 +13,12 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class TransactionServiceTest {
+class WithdrawalServiceTest {
 
      private final static String ACCOUNT_NUMBER = "05001330688";
 
     @Autowired
-    private TransactionService transactionService;
+    private WithdrawalService withdrawalService;
 
     @Autowired
     private AccountService accountService;
@@ -31,7 +30,7 @@ class TransactionServiceTest {
         final BigDecimal previousBalance = accountService.findByAccountNumber(ACCOUNT_NUMBER).getBalance();
         final BigDecimal withdrawAmount = BigDecimal.valueOf(60);
 
-        String transactionReference = transactionService.process(withdrawAmount, ACCOUNT_NUMBER);
+        String transactionReference = withdrawalService.process(withdrawAmount, ACCOUNT_NUMBER);
         AccountDTO accountDTO = accountService.getBalance(ACCOUNT_NUMBER);
         assertNotNull(transactionReference);
         assertEquals(previousBalance.subtract(withdrawAmount), accountDTO.balance());

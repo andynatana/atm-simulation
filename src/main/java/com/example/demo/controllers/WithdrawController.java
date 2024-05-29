@@ -3,7 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.exception.BalanceInsufficientException;
 import com.example.demo.pojo.ws.params.WithdrawParam;
 import com.example.demo.pojo.ws.response.WithdrawResponse;
-import com.example.demo.service.TransactionService;
+import com.example.demo.service.WithdrawalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class WithdrawController {
 
-    private final TransactionService transactionService;
+    private final WithdrawalService withdrawalService;
 
     @PostMapping
     public ResponseEntity<WithdrawResponse> withdraw(@RequestBody WithdrawParam withdrawParam) throws BalanceInsufficientException {
-        String transactionId = transactionService.process(withdrawParam.amount(), withdrawParam.accountNumber());
+        String transactionId = withdrawalService.process(withdrawParam.amount(), withdrawParam.accountNumber());
         return ResponseEntity.ok(new WithdrawResponse(transactionId));
     }
 }
