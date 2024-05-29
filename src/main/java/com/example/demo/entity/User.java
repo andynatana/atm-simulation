@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,5 +38,6 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "owner")
+    @JsonIgnore
     private List<Account> accountList;
 }

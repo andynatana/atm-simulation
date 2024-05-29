@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.exception.AccountCategoryNotFoundException;
+import com.example.demo.exception.AccountNotFoundException;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.pojo.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,14 @@ public class GlobalControllerAdvice {
 
     @ExceptionHandler(AccountCategoryNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAccountCategoryNotFoundException(AccountCategoryNotFoundException exception) {
+        ErrorResponse wsResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), exception.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND.value())
+                .body(wsResponse);
+    }
+
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAccountNotFoundException(AccountNotFoundException exception) {
         ErrorResponse wsResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), exception.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND.value())
