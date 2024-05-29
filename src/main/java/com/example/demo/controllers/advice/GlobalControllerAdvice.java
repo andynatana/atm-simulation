@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controllers.advice;
 
 import com.example.demo.exception.AccountCategoryNotFoundException;
 import com.example.demo.exception.AccountNotFoundException;
