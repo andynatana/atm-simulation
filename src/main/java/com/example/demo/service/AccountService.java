@@ -4,8 +4,10 @@ import com.example.demo.entity.Account;
 import com.example.demo.entity.AccountCategory;
 import com.example.demo.entity.User;
 import com.example.demo.exception.AccountNotFoundException;
+import com.example.demo.mapper.AccountMapper;
+import com.example.demo.pojo.ws.response.AccountDTO;
 import com.example.demo.repository.AccountRepository;
-import com.example.demo.ws.params.AccountCreationParam;
+import com.example.demo.pojo.ws.params.AccountCreationParam;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,13 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final UserService userService;
     private final AccountCategoryService accountCategoryService;
+    private final AccountMapper accountMapper;
 
-    public Account getBalance(Long userId, Long accountCategoryId) {
+    public AccountDTO getBalance(Long userId, Long accountCategoryId) {
         User user = userService.findById(userId);
         AccountCategory accountCategory = accountCategoryService.findById(accountCategoryId);
         return accountRepository.findByOwnerAndAccountCategory(user, accountCategory)
+                .map(accountMapper::mapToAccountDTO)
                 .orElseThrow(() -> new AccountNotFoundException("The user does not have " + accountCategory.getName() + " account"));
     }
 
