@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Getter
 @Setter
@@ -31,4 +30,8 @@ public class User {
     @UpdateTimestamp
     private Timestamp updateDate;
 
+    private String mail;
+
+    @Column(name = "USER_PASSWORD")
+    private String password;
 }

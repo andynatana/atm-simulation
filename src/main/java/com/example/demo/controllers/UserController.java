@@ -22,4 +22,10 @@ public class UserController {
         User savedUser = userService.save(user);
         return new WSResponse(HttpStatus.CREATED.value(), "User created successfully !", savedUser);
     }
+
+    @PostMapping("/login")
+    public WSResponse login(@RequestBody User user) {
+        User connectedUser = userService.login(user.getMail(), user.getPassword());
+        return new WSResponse(HttpStatus.OK.value(), "User connected successfully!", connectedUser);
+    }
 }
