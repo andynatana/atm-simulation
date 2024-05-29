@@ -31,6 +31,12 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException("The user does not have " + accountCategory.getName() + " account"));
     }
 
+    public AccountDTO getBalance(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber)
+                .map(accountMapper::mapToAccountDTO)
+                .orElseThrow(() -> new AccountNotFoundException("The user does not have any account"));
+    }
+
     @Transactional
     public Account create(AccountCreationParam accountCreationParam) {
         Account account = createAccountInstanceFromParam(accountCreationParam);

@@ -37,6 +37,8 @@ public class TransactionService {
         //update account balance
         account.setBalance(account.getBalance().subtract(amount));
         accountService.save(account);
-        return null;
+
+        //Return reference
+        return transaction.getReference();
     }
 }
