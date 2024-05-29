@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -24,6 +26,11 @@ public class UserService {
     }
 
     public User login(String mail, String password) {
-        return null;
+        return userRepository.findUserByMailAndPassword(mail, password)
+                .orElseThrow(() -> new UserNotFoundException("Incorrect credentials, please verify !"));
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,4 +35,7 @@ public class User {
 
     @Column(name = "USER_PASSWORD")
     private String password;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Account> accountList;
 }
