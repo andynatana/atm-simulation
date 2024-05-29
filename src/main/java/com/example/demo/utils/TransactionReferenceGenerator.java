@@ -9,15 +9,14 @@ public final class TransactionReferenceGenerator {
         // Get the current date and time
         LocalDateTime now = LocalDateTime.now();
 
-        // Define the date and hour format
+        // Format the date and time components
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        DateTimeFormatter hourFormatter = DateTimeFormatter.ofPattern("HH");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH.mm.ss");
 
-        // Format the date and hour
         String date = now.format(dateFormatter);
-        String hour = now.format(hourFormatter);
+        String time = now.format(timeFormatter);
 
-        // Combine to form the transaction reference
-        return "WD" + date + hour;
+        // Combine the components to form the transaction reference
+        return "WD." + date + "." + time;
     }
 }
