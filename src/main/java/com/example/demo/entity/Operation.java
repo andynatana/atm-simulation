@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 
-import com.example.demo.entity.enums.TransactionType;
+import com.example.demo.entity.enums.OperationType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Transaction {
+public class Operation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Transaction {
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    private TransactionType type;
+    private OperationType type;
 
     @CreationTimestamp
     private Timestamp initDate;

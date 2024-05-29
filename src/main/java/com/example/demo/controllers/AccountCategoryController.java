@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entity.AccountCategory;
-import com.example.demo.service.AccountCategoryService;
+import com.example.demo.service.impl.AccountCategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

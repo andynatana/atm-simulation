@@ -3,7 +3,7 @@ package com.example.demo.utils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public final class TransactionReferenceGenerator {
+public final class OperationReferenceGenerator {
 
     public static String generateOne() {
         // Get the current date and time
