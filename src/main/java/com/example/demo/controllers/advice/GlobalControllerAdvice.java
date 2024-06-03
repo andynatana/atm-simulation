@@ -2,7 +2,7 @@ package com.example.demo.controllers.advice;
 
 import com.example.demo.exception.AccountCategoryNotFoundException;
 import com.example.demo.exception.AccountNotFoundException;
-import com.example.demo.exception.BalanceInsufficientException;
+import com.example.demo.exception.operation.BalanceInsufficientException;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.pojo.ws.response.ErrorResponse;
 import org.springframework.http.HttpStatus;

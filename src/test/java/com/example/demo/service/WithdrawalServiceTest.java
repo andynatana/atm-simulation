@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
+import com.example.demo.builder.OperationBuilder;
 import com.example.demo.entity.Account;
-import com.example.demo.exception.BalanceInsufficientException;
+import com.example.demo.entity.Operation;
+import com.example.demo.exception.operation.BalanceInsufficientException;
+import com.example.demo.exception.operation.OperationException;
 import com.example.demo.pojo.ws.response.AccountDTO;
 import com.example.demo.service.impl.AccountService;
 import jakarta.transaction.Transactional;
@@ -26,15 +29,19 @@ class WithdrawalServiceTest {
     @Autowired
     private AccountService accountService;
 
+    private OperationBuilder operationBuilder;
+
     @Test
     @Transactional
     @Rollback(value = false)
-    void testProcess() throws BalanceInsufficientException {
+    void testProcess() throws OperationException {
         Account account = accountService.findByAccountNumber(ACCOUNT_NUMBER);
         final BigDecimal previousBalance = account.getBalance();
         final BigDecimal withdrawAmount = BigDecimal.valueOf(740);
 
-        String transactionReference = operationService.process(withdrawAmount, account);
+        Operation operation = operationBuilder.build(withdrawAmount, account);
+
+        String transactionReference = operationService.process(operation);
         AccountDTO accountDTO = accountService.getBalance(ACCOUNT_NUMBER);
         assertNotNull(transactionReference);
         assertEquals(previousBalance.subtract(withdrawAmount), accountDTO.balance());

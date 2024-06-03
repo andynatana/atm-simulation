@@ -41,8 +41,4 @@ public class User {
     @JsonIgnore
     private List<Account> accountList;
 
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Operation> operationList;
 }

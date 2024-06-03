@@ -34,5 +34,5 @@ public class Operation {
     private Timestamp initDate;
 
     @ManyToOne
-    private User user;
+    private Account account;
 }

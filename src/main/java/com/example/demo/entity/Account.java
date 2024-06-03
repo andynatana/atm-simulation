@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,4 +29,8 @@ public class Account {
     @ManyToOne
     @JoinColumn(referencedColumnName = "id", name = "user_id")
     private User owner;
+
+    @OneToMany(mappedBy = "account")
+    @JsonIgnore
+    private List<Operation> operationList;
 }

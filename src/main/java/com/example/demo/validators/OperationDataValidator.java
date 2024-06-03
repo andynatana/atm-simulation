@@ -1,7 +1,7 @@
 package com.example.demo.validators;
 
 import com.example.demo.entity.Account;
-import com.example.demo.exception.BalanceInsufficientException;
+import com.example.demo.exception.operation.BalanceInsufficientException;
 
 import java.math.BigDecimal;
 
