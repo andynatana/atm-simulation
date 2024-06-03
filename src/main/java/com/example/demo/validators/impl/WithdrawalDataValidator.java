@@ -11,8 +11,7 @@ import java.math.BigDecimal;
 public class WithdrawalDataValidator implements OperationDataValidator {
 
     @Override
-    public boolean validate(BigDecimal amount, Account account) throws BalanceInsufficientException {
+    public void validate(BigDecimal amount, Account account) throws BalanceInsufficientException {
         if (amount.compareTo(account.getBalance()) > 0) throw new BalanceInsufficientException();
-        return true;
     }
 }

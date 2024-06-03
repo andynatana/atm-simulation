@@ -29,7 +29,7 @@ public class WithdrawController {
         Account account = accountService.findByAccountNumber(withdrawParam.accountNumber());
 
         //processing operation : here withdrawal
-        boolean withdrawParamIsValid = operationDataValidator.validate(withdrawParam.amount(), account);
+        operationDataValidator.validate(withdrawParam.amount(), account);
         String transactionId = operationService.process(withdrawParam.amount(), account);
         return ResponseEntity.ok(new WithdrawResponse(transactionId));
     }

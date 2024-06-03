@@ -7,5 +7,5 @@ import java.math.BigDecimal;
 
 public interface OperationDataValidator {
 
-    boolean validate(BigDecimal amount, Account account) throws BalanceInsufficientException;
+    void validate(BigDecimal amount, Account account) throws BalanceInsufficientException;
 }
