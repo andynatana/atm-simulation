@@ -12,7 +12,7 @@ public interface OperationBuilder {
 
     default Operation build(BigDecimal amount, Account account) throws OperationException {
         validateData(amount, account);
-        String transactionReference = OperationReferenceGenerator.generateOne();
+        String transactionReference = generateReference();
         Operation operation = new Operation();
         operation.setAmount(amount);
         operation.setReference(transactionReference);
@@ -20,6 +20,8 @@ public interface OperationBuilder {
         operation.setType(getType());
         return operation;
     }
+
+    String generateReference();
 
     void validateData(BigDecimal amount, Account account) throws OperationException;
 

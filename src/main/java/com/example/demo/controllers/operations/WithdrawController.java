@@ -8,7 +8,7 @@ import com.example.demo.pojo.ws.params.OperationParam;
 import com.example.demo.pojo.ws.response.WithdrawResponse;
 import com.example.demo.service.OperationService;
 import com.example.demo.service.impl.AccountService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,12 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/withdraw")
-@AllArgsConstructor
 public class WithdrawController {
 
-    private final OperationService operationService;
+    private final OperationService withdrawalService;
+    private final OperationBuilder withdrawalOperationBuilder;
     private final AccountService accountService;
-    private final OperationBuilder operationBuilder;
+
+    public WithdrawController(
+            @Qualifier("withdrawalService") OperationService withdrawalService,
+            @Qualifier("withdrawalOperationBuilder") OperationBuilder withdrawalOperationBuilder,
+            AccountService accountService) {
+        this.withdrawalService = withdrawalService;
+        this.accountService = accountService;
+        this.withdrawalOperationBuilder = withdrawalOperationBuilder;
+    }
 
     @PostMapping
     public ResponseEntity<WithdrawResponse> withdraw(@RequestBody OperationParam operationParam) throws OperationException {
@@ -30,10 +38,10 @@ public class WithdrawController {
         Account account = accountService.findByAccountNumber(operationParam.accountNumber());
 
         //build the current operation
-        Operation operation = operationBuilder.build(operationParam.amount(), account);
+        Operation operation = withdrawalOperationBuilder.build(operationParam.amount(), account);
 
         //processing operation
-        String transactionId = operationService.process(operation);
+        String transactionId = withdrawalService.process(operation);
         return ResponseEntity.ok(new WithdrawResponse(transactionId));
     }
 }

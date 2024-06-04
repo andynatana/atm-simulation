@@ -1,11 +1,13 @@
 package com.example.demo.utils;
 
+import com.example.demo.entity.enums.OperationType;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public final class OperationReferenceGenerator {
 
-    public static String generateOne() {
+    public static String generateOne(OperationType operationType) {
         // Get the current date and time
         LocalDateTime now = LocalDateTime.now();
 
@@ -17,6 +19,6 @@ public final class OperationReferenceGenerator {
         String time = now.format(timeFormatter);
 
         // Combine the components to form the transaction reference
-        return "WD." + date + "." + time;
+        return operationType.getValue() + date + "." + time;
     }
 }

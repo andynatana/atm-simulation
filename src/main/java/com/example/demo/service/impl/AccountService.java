@@ -10,6 +10,7 @@ import com.example.demo.repository.AccountRepository;
 import com.example.demo.pojo.ws.params.AccountCreationParam;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
