@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @Qualifier("depositService")
 @AllArgsConstructor
@@ -16,9 +18,12 @@ public class DepositService implements OperationService {
     private OperationRepository operationRepository;
 
     @Override
+    public void updateAccount(Account account, BigDecimal amount) {
+        account.setBalance(account.getBalance().add(amount));
+    }
+
+    @Override
     public void persistData(Operation operation) {
-        Account account = operation.getAccount();
-        account.setBalance(account.getBalance().add(operation.getAmount()));
         operationRepository.save(operation);
     }
 }

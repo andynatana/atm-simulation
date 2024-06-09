@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @AllArgsConstructor
 @Qualifier("withdrawalService")
@@ -18,14 +20,13 @@ public class WithdrawalService implements OperationService {
     private final OperationRepository operationRepository;
 
     @Override
-    public void persistData(Operation operation) {
-
-        //update account balance
-        Account account = operation.getAccount();
-        account.setBalance(account.getBalance().subtract(operation.getAmount()));
+    public void updateAccount(Account account, BigDecimal amount) {
+        account.setBalance(account.getBalance().subtract(amount));
         accountService.save(account);
+    }
 
-        //create operation of type withdraw
+    @Override
+    public void persistData(Operation operation) {
         operationRepository.save(operation);
 
     }

@@ -3,11 +3,9 @@ package com.example.demo.validators.impl;
 import com.example.demo.entity.Account;
 import com.example.demo.exception.operation.BalanceInsufficientException;
 import com.example.demo.validators.OperationDataValidator;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
-@Service
 public class WithdrawalDataValidator implements OperationDataValidator {
 
     @Override

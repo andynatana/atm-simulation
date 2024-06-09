@@ -17,20 +17,9 @@ import static com.example.demo.entity.enums.OperationType.WITHDRAW;
 @Qualifier("withdrawalOperationBuilder")
 public class WithdrawalOperationBuilder implements OperationBuilder {
 
-    private final OperationDataValidator operationDataValidator;
-
-    public WithdrawalOperationBuilder(OperationDataValidator operationDataValidator) {
-        this.operationDataValidator = operationDataValidator;
-    }
-
     @Override
     public String generateReference() {
         return OperationReferenceGenerator.generateOne(WITHDRAW);
-    }
-
-    @Override
-    public void validateData(BigDecimal amount, Account account) throws OperationException {
-        operationDataValidator.validate(amount, account);
     }
 
     @Override
